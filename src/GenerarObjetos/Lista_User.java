@@ -11,19 +11,14 @@
 package GenerarObjetos;
 
 import java.awt.Container;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
-import java.awt.event.MouseEvent;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 
 /**
  *
@@ -43,7 +38,6 @@ public class Lista_User extends javax.swing.JFrame {
         this.usuarios=users;
         this.cantidad=cant;
         iniciar();
-        addListener();
     }
 
     @SuppressWarnings("unchecked")
@@ -69,10 +63,10 @@ public class Lista_User extends javax.swing.JFrame {
 
     private void crearObjetos() {
         this.principal.setBounds(0,0,200,500);
-        principal.setLayout(new BoxLayout(this.principal,BoxLayout.PAGE_AXIS));
+        this.principal.setLayout(new BoxLayout(principal,BoxLayout.PAGE_AXIS));
         for(int i=0;i<this.cantidad;i++){
             this.contenedores[i][0]=new Container();
-            this.contenedores[i][0].setSize(90,100);
+            this.contenedores[i][0].setSize(200,100);
             this.contenedores[i][0].setLayout(new BoxLayout(this.contenedores[i][0],BoxLayout.LINE_AXIS));
             this.contenedores[i][1]=new Container();
             this.contenedores[i][1].setSize(110, 100);
@@ -83,14 +77,14 @@ public class Lista_User extends javax.swing.JFrame {
             this.objetos[i][2]=new JLabel(this.usuarios[i].apellido);
             this.objetos[i][3]=new JLabel(this.usuarios[i].direccion);
             this.objetos[i][4]=new JLabel((usuarios[i].sexo=='M'?"Masculino":"Femenino"));
-            colocarObjetos(i);
+            colocarElementos(i);
         }
         JScrollPane scroll=new JScrollPane();
+        scroll.setSize(200,200);
         scroll.setViewportView(principal);
-        scroll.setSize(200,300);
-        scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setBorder(null);
         this.getContentPane().add(scroll);
+        
     }
 
     private void configurarImagen(int i) {
@@ -100,33 +94,17 @@ public class Lista_User extends javax.swing.JFrame {
     }
     //Termino la clase en configurar la imagen del primer label (Label Image)
 
-    private void colocarObjetos(int i) {
-        this.contenedores[i][0].add(((JLabel)this.objetos[i][0]));
+    private void colocarElementos(int i) {
+        this.contenedores[i][0].add(((JLabel)this.objetos[i][0])); //agregando Label de imagen en el contenedor (horizontal)
         this.contenedores[i][0].add(Box.createRigidArea(new Dimension(10,0)));
-        this.contenedores[i][1].add(((JLabel)this.objetos[i][1]));
-        this.contenedores[i][1].add(Box.createRigidArea(new Dimension(0,5)));
-        this.contenedores[i][1].add(((JLabel)this.objetos[i][2]));
-        this.contenedores[i][1].add(Box.createRigidArea(new Dimension(0,5)));
-        this.contenedores[i][1].add(((JLabel)this.objetos[i][3]));
-        this.contenedores[i][1].add(Box.createRigidArea(new Dimension(0,5)));
-        this.contenedores[i][1].add(((JLabel)this.objetos[i][4]));
-        this.contenedores[i][0].add(this.contenedores[i][1]);
-        this.contenedores[i][0].add(Box.createRigidArea(new Dimension(10,0)));
-        this.principal.add(this.contenedores[i][0]);
-        this.principal.add(Box.createRigidArea(new Dimension(0,10)));
+        this.contenedores[i][1].add(((JLabel)this.objetos[i][1])); //agregando nombre en el segundo contenendor (vertical)
+        this.contenedores[i][1].add(((JLabel)this.objetos[i][2])); //agregando apellido en el segundo contenendor (vertical)
+        this.contenedores[i][1].add(((JLabel)this.objetos[i][3])); //agregando direcc en el segundo contenendor (vertical)
+        this.contenedores[i][1].add(((JLabel)this.objetos[i][4])); //agregando sexo en el segundo contenendor (vertical)
+        this.contenedores[i][0].add(this.contenedores[i][1]); //agregando el segundo contenedor (vertical) al primero (Horizontal)
+        this.principal.add(this.contenedores[i][0]); //agregando el contenedor horizontal, al contenedor principal
+        this.principal.add(Box.createRigidArea(new Dimension(0,15)));
     }
-
-    private void tirarMensaje(){
-        JOptionPane.showMessageDialog(rootPane, "Probando boton","boton",JOptionPane.INFORMATION_MESSAGE);
-    }
-    private void addListener() {
-        for(int i=0;i<this.cantidad;i++){
-            ((JLabel)this.objetos[i][0]).addMouseListener(new java.awt.event.MouseAdapter(){
-                @Override
-                public void mouseClicked(MouseEvent evt){
-                    tirarMensaje();
-                }
-            });
-        }
-    }
+    
+    
 }
