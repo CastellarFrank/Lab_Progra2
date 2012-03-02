@@ -11,7 +11,7 @@ package GenerarObjetos;
  */
 public class Usuario {
     public char sexo;
-    public String nombre,apellido,direccion,url,estado;  
+    public String nombre,apellido,direccion,url;  
     
     public Usuario(String n,String a,String d,String u,char s){
         this.sexo=s;
