@@ -25,6 +25,7 @@ public class Informacion extends javax.swing.JFrame {
     public Informacion() {
         initComponents();
         iniciar();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -134,6 +135,7 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
 }//GEN-LAST:event_jButton1MouseClicked
 
 private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+    
     this.ventana=new Lista_User(this.usuarios,cant);
     this.ventana.setVisible(true);
 }//GEN-LAST:event_jButton3MouseClicked
